@@ -1,0 +1,40 @@
+<html>
+  <title>Open Technology Radio</title>
+  <head>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue-amber.min.css" /> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js">
+    </script>
+    <style>
+      body {
+          {% load staticfiles %}
+          background-image: url("{% static "img/cloth.png" %}");
+      }
+      .mdl-card__supporting-text {
+          text-align: justify;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+	     <div class="mdl-layout__header-row">
+	       <span class="mdl-layout-title">
+	         Open Technology Radio
+	       </span>
+	     </div>
+      </header>
+      <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+	       <div class="mdl-card__supporting-text">
+            <h2>How to broadcast</h2>
+	          <p>Open Technology Radio relies on a strong community to reach as many people as possible. One way to help us grow is to broadcast on a local radio frequency with a Raspberry Pi. If you are interested, please <a href="/var/downloads/OTRBK.tar.gz" download>click here</a> to download the OTR Broadcaster Kit to get started!</p>
+	          <h2>Other ways to help</h2>
+	          <p>If you like what you've been listening to on OTR, then getting your friends to tune in to a show is a great way to help the community grow. Another way is to become an active part of the OTR IRC; it's a great way to make new friends and share your thoughts on the shows. If you are a developer and want to make OTR better, visit the <a href="http://www.github.com/TristanDamron/OpenTechnologyRadio">Open Technology Radio Github page</a> and contribute to the repository.</p>
+	          <h3>Thanks for listening and being awesome!</h3>
+	       </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

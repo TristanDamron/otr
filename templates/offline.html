@@ -1,0 +1,80 @@
+<html>
+  <title>Open Technology Radio</title>
+  <head>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue-amber.min.css" /> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js">
+    </script>
+    <script>
+      window.setInterval(reload, 60000);
+      
+      function reload() {
+          var d = new Date();
+          if (d.getMinutes() == 0) {
+              location.reload();
+          }
+      }
+    </script>
+    <style>
+      body {
+          {% load staticfiles %}
+          background-image: url("{% static "img/cloth.png" %}");
+      }
+      .mdl-card__supporting-text {
+          text-align: justify;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+	     <div class="mdl-layout__header-row">
+	       <span class="mdl-layout-title">
+	         Open Technology Radio 
+	       </span>
+	     </div>
+      </header>
+    <div class="mdl-grid">
+      <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+	     <div class="mdl-card__supporting-text">
+	       <h1>You just missed us!</h1>
+	       <p>OTR is currently not broadcasting anything. The full schedule can be found below the chat window. While you wait for the next show, why not hop on the IRC channel?</p>
+	       <iframe src="http://webchat.freenode.net?channels=%23otr&uio=MTE9MTk117" width="647" height="750"></iframe>
+	     </div>
+      </div>
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+	     <thead>
+	       <tr>
+	         <th>Show</th>
+	         <th>Time Slot</th>
+	         <th>Contact</th>
+	       </tr>
+	     </thead>
+	     <tbody>
+          {% for s in show %}
+	         {% if s.time_slot_from == current_show.time_slot_from %}
+	           <tr class="mdl-button--primary">
+	             <td> {{ s.show_name }} </td>
+	             <td> {{ s.time_slot_from }} - {{ s.time_slot_to }} </td>
+	             <td> {{ s.email }} </td>
+	           </tr>
+	         {% else %}
+	           <tr>
+	             <td> {{ s.show_name }} </td>
+        	     <td> {{ s.time_slot_from }} - {{ s.time_slot_to }} </td>
+        	     <td> {{ s.email }} </td>
+	           </tr>
+	         {% endif %}
+          {% endfor %}
+	     </tbody>
+      </table>
+      {% for n in news %}
+      <div class="mdl-card mdl-shadow--2dp">
+	     <div class="mdl-card__title"> {{ n.title }} </div>
+	     <div class="mdl-card__supporting-text"> {{ n.text }} </div>
+      </div>
+      {% endfor %}
+    </div>
+   </div>
+  </body>
+</html>

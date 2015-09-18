@@ -1,0 +1,111 @@
+<html>
+  <title>Open Technology Radio</title>
+  <head>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue-amber.min.css" /> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js">
+    </script>
+    <script>
+      window.setInterval(reload, 60000);
+      
+      function reload() {
+          var d = new Date();
+          if (d.getMinutes() == 0) {
+              location.reload();
+          }
+      }
+
+      var audio = document.getElementsByTagName("audio");
+      
+      function getlive() {
+          var d = new Date();
+          console.log(60 * d.getMinutes());
+          audio[0].currentTime = 60 * d.getMinutes();
+          audio[0].play();
+      }
+
+      function submissions() {
+          window.alert("Submissions can be emailed to tdamron14@mail.wou.edu. Please include the name of the show, your name(s), a brief description of the show, and enclose a pilot episode. Your submission will be processed, and you will receive a message in 3-5 business days on the status of the submission");
+      }
+    </script>
+    <style>
+      audio {
+          width: 100%;
+      }      
+      body {
+          {% load staticfiles %}
+          background-image: url("{% static "img/cloth.png" %}");
+      }
+      .mdl-card__supporting-text {
+          text-align: justify;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+	     <div class="mdl-layout__header-row">
+	       <span class="mdl-layout-title">
+	         Open Technology Radio
+	       </span>
+	     </div>
+      </header>
+    <div class="mdl-grid">
+      <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+	     <div class="mdl-card__supporting-text">
+ 	       <center><h4>{{ current_show.show_name }}</h4><img src="{{ current_show.image.url }}" alt="{{ current_show.show_name }}" width="75%" height="90%"/>
+	       <p>{{ current_show.description }}</p>	    
+	       <audio controls="controls" preload="auto" onloadeddata="getlive()">
+	         <source src="{{ current_audio }}" type="audio/wav">
+	         Unfortunately, your browser doesn't support audio. Have you tried <a href="http://chrome.google.com">Google Chrome</a> or <a href="http://www.mozilla.org/firefox">Mozilla Firefox?</a>
+	       </audio></center>
+	       <iframe src="http://webchat.freenode.net?channels=%23otr&uio=MTE9MTk117" width="647" height="750"></iframe>
+	     </div>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col">
+	     <a href="/broadcast"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+	       Broadcast
+	     </button></a>
+	     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="submissions()">
+	       Submit a Show
+	     </button>
+	     <a href="mailto:tdamron14@mail.wou.edu?subject=Inquiry"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
+	       Contact
+	     </button></a>
+      </div>
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+	     <thead>
+	       <tr>
+	         <th>Show</th>
+	         <th>Time Slot</th>
+	         <th>Contact</th>
+	       </tr>
+	     </thead>
+	     <tbody>
+          {% for s in show %}
+	         {% if s.time_slot_from == current_show.time_slot_from %}
+	           <tr class="mdl-button--primary">
+	             <td> {{ s.show_name }} </td>
+	             <td> {{ s.time_slot_from }} - {{ s.time_slot_to }} </td>
+	             <td> {{ s.email }} </td>
+	           </tr>
+	         {% else %}
+	           <tr>
+	             <td> {{ s.show_name }} </td>
+        	     <td> {{ s.time_slot_from }} - {{ s.time_slot_to }} </td>
+        	     <td> {{ s.email }} </td>
+	           </tr>
+	         {% endif %}
+          {% endfor %}
+	     </tbody>
+      </table>
+      {% for n in news %}
+      <div class="mdl-card mdl-shadow--2dp">
+	     <div class="mdl-card__title"> {{ n.title }} </div>
+	     <div class="mdl-card__supporting-text"> {{ n.text }} </div>
+      </div>
+      {% endfor %}
+    </div>
+   </div>
+  </body>
+</html>
