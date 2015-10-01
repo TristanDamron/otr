@@ -10,9 +10,13 @@ Once you've created the project, simply drag the original OTR folder into the "o
 
 ###*'otr',*
 
-This will add the OTR app to your project. Now, all that's left to do is migrate the database. You can do this by running these commands inside the "otrproject" directory:
+This will add the OTR app to your project. Now, migrate the database. You can do this by running these commands inside the "otrproject" directory:
 
 ###*python manage.py makemigrations otr && python manage.py migrate*
+
+Finally, you must include the proper urls to the 'urls.py' file in the 'otrproject' folder. In the list called 'urlpatterns' add this line:
+
+###*url(r'^', include('otr.urls')),
 
 Congratulations! You're ready to run OTR! You can now add shows and other media through the Django admin panel, which is accessible by starting a local server:
 
