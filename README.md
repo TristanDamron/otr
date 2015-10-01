@@ -16,7 +16,7 @@ This will add the OTR app to your project. Now, migrate the database. You can do
 
 Finally, you must include the proper urls to the 'urls.py' file in the 'otrproject' folder. In the list called 'urlpatterns' add this line:
 
-###*url(r'^', include('otr.urls')),
+###*url(r'^', include('otr.urls')),*
 
 Congratulations! You're ready to run OTR! You can now add shows and other media through the Django admin panel, which is accessible by starting a local server:
 
